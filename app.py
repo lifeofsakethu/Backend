@@ -8,6 +8,10 @@ CORS(app)
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+@app.route('/')
+def index():
+    return '✅ Flask backend is running!'
+
 @app.route('/upload', methods=['POST'])
 def upload():
     file = request.files['file']
@@ -21,6 +25,3 @@ def list_files():
 @app.route('/uploads/<filename>', methods=['GET'])
 def serve_file(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
-
-if __name__ == '__main__':
-    app.run()
